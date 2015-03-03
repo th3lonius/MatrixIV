@@ -1,0 +1,796 @@
+/*
+Theme Name: Gravel
+Theme URI: http://greengravelcomedyfest.com
+Description: A custom Wordpress portfolio site for the Green Gravel Comedy Fest
+Author: Matthew Mesaros
+Version: 1.0
+
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/* BASE */
+@import 'partials/reset';
+@import 'partials/variables';
+@import 'partials/media_queries';
+@import 'partials/mixins';
+@import 'partials/functions';
+@import 'partials/type';
+@import 'partials/base';
+@import 'partials/grid';
+@import 'partials/navigation';
+@import 'partials/superslides';
+@import 'partials/animations';
+
+/* PAGES */
+@import 'partials/festinfo';
+
+/* =GLOBALS
+/* =GLOBALS
+----------------------------------------------- */
+.strikethru {
+    text-decoration: line-through!important;
+}
+
+#skrollr-body {
+	@include transition(all, 0.3s, ease);
+    position: relative;
+    right: 0;
+    z-index: 10;
+}
+
+main {
+    @include respond-to(tablet) { top: 10em; }
+    margin: 0 auto;
+    position: relative;
+    top: 8em;
+	text-align: center;
+    z-index: 1;
+}
+
+.home-page main { top: 0; }
+
+article {
+	@extend %clearfix;
+	margin: 0 auto;
+    position: relative;
+    text-align: left;
+    aside { float: right!important; }
+}
+
+section { position: relative; }
+
+header {text-align: center;}
+
+.padded {
+    @include respond-to(tv) {
+        max-width: 100em;
+    }
+    margin: 0 auto;
+    max-width: 86em;
+    padding: 3.5em $base-padding;
+}
+
+.padded-x { padding: 1em $base-padding; }
+
+.highlight {
+    &::before {
+        @include respond-to(tablet) {
+            background-color: $green;
+            content: "";
+            position: absolute;
+            top: 0; bottom: 4rem; left: 2px;
+            width: 2px;
+        }
+    }
+}
+
+.contrast {
+    background: rgba(0,0,0,0.2);
+    padding: 4em 0;
+    & + article { padding-top: 6em; }
+}
+
+.no-float { float: none!important; }
+
+.node {
+    @include transition(all, 0.2s, ease-in-out);
+	@include respond-to(tablet) { float: left; }
+    a {
+        background: rgba(0,0,0,0.1);
+        border-radius: 4px;
+        padding: $base-padding;
+        text-align: center;
+        &:hover { background: rgba(0,0,0,0.3); }
+    }
+	margin-bottom: 1em;
+    padding: 2rem;
+	width: 100%;
+}
+
+.separator {
+    background: $white;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+    top: 0.75em;
+    width: 1px; height: 40px;
+}
+
+/* =HEADER
+----------------------------------------------- */
+.home-page .global-header {
+    @include respond-to(laptop) {
+        height: 480px;
+    }
+    background-image: url(img/old_iowa_city.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%; max-width: 100%; height: 320px;
+    &::before {
+        @include respond-to(laptop) {
+            background: rgba(0,0,0,0.4);
+        }
+        background: rgba(0,0,0,0.6);
+        content: "";
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+    }
+}
+
+.global-header {
+    @include transition(all, 0.3s, ease);
+    @include respond-to(tablet) {
+        height: 320px;
+    }
+    margin: 0 auto;
+    position: relative;
+	max-width: 62em; height: 300px;
+	z-index: 11;
+}
+
+.logo {
+    @include respond-to(laptop) {
+        height: 80%;
+        top: 64px;
+    }
+    background-image: url(img/logo-2015-opt.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+	position: absolute;
+	width: 100%; height: 100%;
+}
+
+header article strong {
+    font-weight: 900;
+}
+
+/* =SLIDER
+----------------------------------------------- */
+.slider {
+    padding: $h3 0 0;
+    header h3 {
+        background-color: $brown;
+        font-weight: 700;
+        opacity: 0.8;
+        padding: 14px 20px;
+        position: absolute;
+        top: 2.5em; left: 0;
+        text-transform: uppercase;
+        z-index: 99999;
+        &::after {
+            border-color: $brown transparent $brown $brown;
+        }
+    }
+}
+
+/* =FRONT PAGE
+----------------------------------------------- */
+.donate {
+    text-align: center;
+    .btn-donate {
+        @include transition(all, 0.1s, ease-in-out, 0.1s);
+        border: 4px solid $red;
+        display: inline-block;
+        font-family: $title-font;
+        font-size: $h4;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding: 10px $base-padding;
+        position: relative;
+        text-transform: uppercase;
+        &:hover {
+            background: $red;
+            color: $white;
+        }
+    }
+    span {
+        display: block;
+        em { font-weight: 700; }
+    }
+}
+
+$container-size: 180px;
+
+@mixin modules($module-icon) {
+    display: block;
+    position: relative;
+    &:hover h4 { color: $green; }
+    &:hover .circle { background: rgba(0,0,0,0.5); }
+    &:hover .module-icon { @include transform(scale(1.1)); }
+    &:hover p { color: $yellow; }
+    .circle {
+        @include border-radius(999);
+        @include transition(all, 0.3s, ease);
+        @include respond-to(tablet) { width: $container-size; height: $container-size; }
+        background: rgba(0,0,0,0.2);
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        width: $container-size*1.2; height: $container-size*1.2;
+        .module-icon {
+            @include transition(all, 0.3s, ease);
+            @include respond-to(tablet) {
+                width: $container-size/1.8;
+            }
+            background-image: url(img/#{$module-icon}.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: $container-size/1.5; height: 100%;
+        }
+    }
+    h4 {
+        @include transition(color, 0.5s, ease);
+        color: $yellow;
+        text-align: center;
+        width: 100%;
+    }
+    p {
+        @include transition(all, 0.3s, ease);
+        color: $white;
+        font-size: $small;
+        text-transform: uppercase;
+    }
+}
+
+.modules {
+    @extend %clearfix;
+    li {
+        @include respond-to(tablet) {
+            margin: 0 0 3rem;
+            width: 50%;
+        }
+        @for $i from 1 through 4 {
+          &:first-child:nth-last-child(#{$i}),
+          &:first-child:nth-last-child(#{$i}) ~ li {
+            @include respond-to(laptop) {
+                margin: 0;
+                width: (100% / $i);
+            }
+          }
+        }
+        float: left;
+        margin: 0 2% 4rem 2%;
+        text-align: center;
+        width: 100% - 4%; height: auto;
+    }
+}
+
+.module-tickets {
+    @include modules(nav-tickets);
+}
+
+.module-lineup {
+    @include modules(nav-lineup-alt);
+}
+
+.module-submissions {
+    @include modules(nav-submissions-alt);
+}
+
+.module-volunteer {
+    @include modules(nav-volunteer);
+}
+
+.module-calendar {
+    @include modules(nav-calendar);
+}
+
+.module-faq {
+    @include modules(nav-festinfo-alt);
+}
+
+/* =EVENTS ARCHIVE
+----------------------------------------------- */
+.calendar {
+    @extend %list-bubbles;
+    li {
+        padding: 0 2rem 0!important;
+    }
+    a {
+        color: $white;
+        &:hover .event header .meta { top: -40px; }
+        .event {
+            overflow: hidden;
+            position: relative;
+            text-transform: uppercase;
+            width: 100%; height: 300px;
+            img {
+                width: 100%; height: auto;
+            }
+            header {
+                position: absolute;
+                bottom: 0; left: 0;
+                width: 100%;
+                .meta {
+                    @include transition(all, 0.2s, ease-in-out);
+                    background: rgba(0,0,0,0.8);
+                    font-family: $title-font;
+                    font-size: $h6;
+                    font-weight: 300;
+                    line-height: 40px;
+                    position: absolute;
+                    top: 0;
+                    width: 100%; height: 40px;
+                    z-index: 0;
+                }
+                .event-title {
+                    padding: 8px;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+}
+
+.events {
+    top: 0;
+    figure {
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 86vh;
+        position: relative;
+        width: 100%;
+        &::after {
+            background: rgba(0,0,0,0.7);
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+    }
+}
+
+.event-details {
+    @include respond-to(laptop) { top: 20em; }
+    position: absolute;
+    top: 13em; bottom: 0; left: 2em; right: 0;
+    aside {
+        float: left!important;
+        padding: 0 2%;
+        position: relative;
+        &::after {
+            @include respond-to(tablet) {
+                background: $white;
+                content: "";
+                position: absolute;
+                top: 2em; bottom: 0; right: 0;
+                width: 2px; height: 60%;
+            }
+        }
+    }
+    .event-meta {
+        position: relative;
+        top: 3em; left: 2em;
+        vertical-align: middle;
+        .venue, time, .ticket-link {
+            font-family: $title-font;
+            font-size: $h5;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .ticket-link {
+            display: inline-block;
+            position: relative;
+            &::before {
+                background-image: url(img/nav-tickets.svg);
+                background-repeat: no-repeat;
+                background-size: contain;
+                content: "";
+                position: absolute;
+                top: 0; left: -40px;
+                width: 40px; height: 40px;
+            }
+        }
+    }
+}
+
+.event-performers {
+    li {
+        width: 50%!important;
+    }
+}
+
+.events em {
+    @include transform(translate(-50%,0));
+    @include respond-to(laptop) { bottom: -35%; }
+    font-family: $title-font;
+    font-style: italic;
+    font-weight: 100;
+    position: absolute;
+    bottom: -25%; left: 50%;
+    &::before {
+        content: "";
+        background: $white;
+        position: absolute;
+        left: -60px; top: 12px;
+        width: 50px; height: 1px;
+    }
+    &::after {
+        content: "";
+        background: $white;
+        position: absolute;
+        right: -60px; top: 12px;
+        width: 50px; height: 1px;
+    }
+}
+
+.sponsor {
+    font-size: $base;
+    position: absolute;
+    bottom: 20px; right: $base-padding;
+}
+
+/* =LINEUP ARCHIVE
+----------------------------------------------- */
+.artist-location {
+    @include flag-style();
+    background: $white;
+    color: $green;
+    display: inline-block;
+    font-size: $h5;
+    font-weight: 300;
+    padding: 12px 18px;
+    bottom: 0; left: 1px;
+    &::after {
+		right: -41px; bottom: 2px; top: auto;
+		border-color: $white transparent $white $white;
+    }
+}
+
+#lineup {
+    @include respond-to(laptop) {
+        width: 80%;
+    }
+}
+
+.lineup {
+    @extend %list-bubbles;
+    .performer {
+        @extend %list-bubble;
+    }
+}
+
+%list-bubbles {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+	@extend %clearfix;
+	li {
+		@include respond-to(tablet) {
+            float: left;
+            padding: 0 3rem 0;
+			width: 33%;
+		}
+        @include respond-to(laptop) {
+            width: 25%;
+        }
+		display: inline-block;
+		float: none;
+        margin-bottom: 3rem;
+		position: relative;
+		width: 75%;
+        a:hover {
+            color: $white;
+        }
+	}
+}
+
+%list-bubble {
+    @include border-radius(999);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    &::before {
+        @include transition(all, 0.25s, ease-in-out);
+        @include respond-to(laptop) {
+            @include linear-gradient(160deg, $green, $brown);
+            @include border-radius(999);
+        }
+        content: '';
+        opacity: 0;
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: 1;
+    }
+    &:hover::before {
+        @include transform(scale(1.08));
+        opacity: 0.5;
+    }
+    &:hover header {
+        @include transform(scale(1));
+        opacity: 1;
+        visibility: visible;
+    }
+    &:hover img {
+        @include respond-to(laptop) {
+            @include transform(scale(1.08) rotateZ(2deg));
+        }
+    }
+    img {
+        @include transition(all, 0.25s, ease-in-out);
+        @include grayscale;
+        @include border-radius(999);
+        display: block;
+        width: 100%;
+    }
+    header {
+        @include transform(scale(1.1));
+        @include transition(all, 0.2s, ease-in-out);
+        @include respond-to(laptop) {
+            padding: 20px;
+            visibility: hidden;
+        }
+        padding: 40px;
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        text-align: center;
+        visibility: visible;
+        white-space: nowrap;
+        z-index: 1;
+        &::before {
+            content: '';
+            display: inline-block;
+            margin-right: -10px;
+            vertical-align: middle;
+            width: 10px; height: 100%;
+        }
+        .content {
+            display: inline-block;
+            letter-spacing: 1px;
+            text-align: left;
+            vertical-align: middle;
+            white-space: normal;
+            width: 100%;
+            .meta {
+                font-size: $small;
+                font-weight: 300;
+            }
+            h3 {
+                @include respond-to(laptop) { font-size: $h5; }
+                font-size: $h5;
+            }
+        }
+    }
+}
+
+.performer-media {
+    text-align: left;
+    a {
+        display: inline-block;
+        font-family: $title-font;
+        font-size: $base;
+        position: relative;
+        text-transform: uppercase;
+        &:nth-child(2)::before {
+            content: "|";
+            padding: 0 10px;
+            position: relative;
+            top: 0; left: 0;
+        }
+    }
+}
+
+/* =LINEUP SINGLE
+----------------------------------------------- */
+.sidebar_node {
+    @include transition(all, 0.3s, ease-in-out);
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    float: left;
+	margin-bottom: $h4;
+    padding: $base-padding;
+	text-align: center;
+	width: 100%;
+    &:hover {
+        @include transition(all, 0.3s, ease-in-out);
+        background: rgba(0,0,0,0.4);
+    }
+    &:hover .event-title { color: $white; }
+    li {
+        margin-bottom: 1.25em;
+    }
+	.event-title {
+        @include respond-to(tablet) { font-size: $h5; }
+        margin-top: 1em;
+    }
+}
+
+%showdate {
+	@include border-radius(9999);
+    align-items: center;
+	color: $white;
+    display: flex;
+    font-family: $title-font;
+    font-size: $h5;
+    font-weight: 300;
+    justify-content: center;
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	width: 175px; height: 175px;
+}
+
+.showdate {
+    @extend %showdate;
+}
+
+.showdate-small {
+    @extend %showdate;
+    font-size: $base;
+    margin-bottom: 1em;
+    width: 100px; height: 100px;
+    .day {
+        font-size: $h4;        
+    }
+}
+
+.day {
+    letter-spacing: 1px;
+	line-height: 1;
+}
+
+.friday { background: $yellow!important; }
+
+.saturday {	background: $orange!important; }
+
+/* =SUBMISSIONS
+----------------------------------------------- */
+.fee_schedule {
+    margin-top: 3rem;
+    ul {
+        @extend %clearfix;
+        li {
+            @include respond-to(laptop) { width: 25%; }
+            display: inline-block;
+            float: left;
+            padding-right: 1em;
+            width: 50%;
+            .sidebar_node {
+                .fee-amount { color: $yellow; }
+                .title {
+                    color: $white;
+                    font-size: $h6;
+                    margin: 1rem 0;
+                }
+                p {
+                    font-size: $small;
+                    text-align: left;
+                }
+                img {
+                    max-width: 60%; height: 100px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
+
+/* =FOOTER
+----------------------------------------------- */
+footer {
+    @include transition(all, 0.3s, ease);
+    @extend %clearfix;
+    background: adjust-color($green, $saturation: -5%, $lightness: -2);
+    margin-top: 12em;
+    padding: 1em 0 4em;
+    position: relative;
+    right: 0;
+    z-index: 99;
+    section {
+        @include respond-to(mobile) {
+            margin-bottom: 1em!important;
+            padding: 0!important;
+            width: 50%!important;
+        }
+        @include respond-to(tablet) {
+            &:first-child { padding-left: 0; }
+            &:last-child { padding-right: 0; }
+        }
+    }
+    header {
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        display: inline-block;
+        font-family: $title-font;
+        font-size: $h6;
+        margin-bottom: 12px;
+        padding: 4px 0;
+        text-transform: uppercase;
+    }
+    a {
+        color: $white;
+        font-size: $small;
+        font-weight: 300;
+        &:hover { color: $yellow; }
+    }
+}
+
+.home-page footer { margin-top: 0; }
+
+.sponsors {
+    @extend %clearfix;
+    ul {
+        width: 100%;
+        li {
+            display: inline-block;
+            padding-right: 1%;
+            width: 31%; height: 100%;
+            vertical-align: middle;
+            &:last-child {
+                padding-right: 0;
+            }
+            a {
+                display: block;
+                height: 100%;
+                &.placeholder {
+                    @include border-radius(999);
+                    background: rgba(0,0,0,0.1);
+                    font-family: $title-font;
+                    font-size: $h6;
+                    line-height: 100px;
+                    text-align: center;
+                    width: 100px; height: 100px;
+                    &:hover {
+                        background: rgba(0,0,0,0.3);
+                    }
+                }
+                img { max-width: 90px; }
+            }
+        }
+    }
+}
+
+.colophon {
+    padding: 0 $h4;
+    header { display: inline-block; }
+    img { max-width: 50px; }
+    span {
+        display: block;
+        font-size: $smaller;
+    }
+}
+
+.colorscape {
+	position: fixed; bottom: 0; left: 0; right: 0;
+	width: 100%;
+	z-index: 999;
+}
+
+.back-top {
+    @include respond-to(tablet) {
+        bottom: 80px;
+    }
+    background-color: $green;
+    background-image: url(img/arrow-up.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    display: block;
+    position: fixed;
+    bottom: 0; right: 0;
+    width: 50px; height: 50px;
+    z-index: 999;
+}

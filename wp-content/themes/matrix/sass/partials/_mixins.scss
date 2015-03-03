@@ -1,0 +1,97 @@
+/*TRANSLATE CENTER*/
+@mixin translate( $x: null, $y: null ) {
+	-webkit-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	transform: translate($x, $y);
+}
+
+@mixin rotate( $perspective: X, $degree: 45 ) {
+	-webkit-transform: rotate#{$perspective}#{("(#{$degree}deg)")};
+	-moz-transform: rotate#{$perspective}#{("(#{$degree}deg)")};
+	transform: rotate#{$perspective}#{("(#{$degree}deg)")};
+}
+
+@mixin transform($transform, $transform2: null) {
+  -webkit-transform: $transform, $transform2;
+     -moz-transform: $transform, $transform2;
+      -ms-transform: $transform, $transform2;
+       -o-transform: $transform, $transform2;
+          transform: $transform, $transform2;
+}
+
+/*ANIMATIONS*/
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes $animation-name {
+        @content;
+    }
+    @-moz-keyframes $animation-name {
+        @content;
+    }
+    @keyframes $animation-name {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    animation: #{$str};
+}
+
+@mixin linear-gradient($degree, $fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient($degree, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient($degree, $fromColor, $toColor); /* FF3.6 */
+  background-image:     -ms-linear-gradient($degree, $fromColor, $toColor); /* IE10 */
+  background-image:      -o-linear-gradient($degree, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image:         linear-gradient($degree, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin grayscale {
+    -webkit-filter: grayscale(100%);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+}
+
+@mixin fullcolor {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+    -webkit-filter: grayscale(0%);
+}
+
+@mixin box-shadow( $horiz, $vert, $blur, $spread, $color ){
+  -webkit-box-shadow: $horiz $vert $blur $spread $color;
+  -moz-box-shadow: $horiz $vert $blur $spread $color;
+  box-shadow: $horiz $vert $blur $spread $color;
+}
+
+@mixin imgblur( $radius ) {
+	-webkit-filter: blur($radius+px); -moz-filter: blur($radius+px);
+	-o-filter: blur($radius+px); -ms-filter: blur($radius+px);
+	filter: url(images/blur.svg#blur); filter: blur($radius+px); filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='$radius');
+}
+
+@mixin border-radius( $radius ) {
+	-webkit-border-radius: $radius+px;
+	-moz-border-radius: $radius+px;
+	-o-border-radius: $radius+px;
+	-ms-border-radius: $radius+px;
+	border-radius: $radius+px;
+}
+
+@mixin scale( $size ) {
+	-webkit-transform: scale($size);
+	-moz-transform: scale($size);
+	-o-transform: scale($size);
+	-ms-transform: scale($size);
+	transform: scale($size);
+}
+
+@mixin transition( $property, $duration, $function, $delay:"" ) {
+	-webkit-transition: $property $duration $function unquote($delay);
+	-moz-transition: $property $duration $function unquote($delay);
+	-o-transition: $property $duration $function unquote($delay);
+	-ms-transition: $property $duration $function unquote($delay);
+	transition: $property $duration $function unquote($delay);
+}

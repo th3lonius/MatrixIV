@@ -1,0 +1,40 @@
+/*
+==============================================
+grow
+==============================================
+*/
+
+.color-bar{
+	animation-name: grow;
+	-webkit-animation-name: grow;	
+
+	animation-duration: 8s;	
+	-webkit-animation-duration: 8s;
+
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@keyframes grow {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(random(50) + px);
+	}	
+	100% {
+		transform: translateY(0);
+	}			
+}
+
+@-webkit-keyframes grow {
+	0% {
+		-webkit-transform: translateY(0);
+	}
+	50% {
+		-webkit-transform: translateY(random(50) + px);
+	}	
+	100% {
+		-webkit-transform: translateY(0);
+	}			
+}

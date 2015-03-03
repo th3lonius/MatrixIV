@@ -1,0 +1,51 @@
+@mixin random-hsla($attr, $color: 365, $alpha: 5) {
+  #{$attr}: hsla(150, random(80)+40, random(55)+30, 0.99);
+}
+
+.color-bar {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 2%;
+}
+
+@for $i from 1 through 50 {
+	.color-bar {
+        @include respond-to(tablet) {
+            &:nth-child(#{$i}) {
+                @include respond-to(tablet) { height: random(60) + px; }
+                height: random(40) + px;
+                @include random-hsla(background-color, 255);
+            }
+        }
+	}
+}
+
+$nav-items: (
+    home: nav-home,
+    tickets: nav-tickets,
+    news: nav-news,
+    festinfo: nav-festinfo,
+    calendar: nav-calendar,
+    lineup: nav-lineup,
+    submissions: nav-submissions,
+    press: nav-staff
+);
+
+%nav-styles {
+    @include transition(all, 0.2s, ease-in-out);
+    background-position: left center;
+    background-repeat: no-repeat;
+    content: "";
+    opacity: 0.6;
+    position: absolute;
+    top: 0; left: 0;
+    width: 30px; height: 100%;
+    &:hover { opacity: 1.0; }
+}
+
+@each $nav-item, $bg-image in $nav-items {
+    .nav-#{$nav-item}::before {
+        @extend %nav-styles;
+        background-image: url(img/#{$bg-image}.svg);
+    }
+}
